@@ -20,7 +20,6 @@ const showMessage = () => {
         });
 
         readline.question('Select option: ', (option) => {
-            console.log({option})
             resolve(option);
             readline.close();}
         );
@@ -34,11 +33,11 @@ const pause = () => {
         input: process.stdin,
         output: process.stdout
     });
-    readline.question(`\nPress ${'Enter'.green } to continue` , (option) => {
-        readline.close();
-        resolve();
-        }
-    );
+
+    readline.question(`\nPress ${'Enter'.green } to continue\n` , (option) => {
+            readline.close();
+            resolve();
+        });
     });
 }
 module.exports = {
