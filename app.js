@@ -1,4 +1,5 @@
 const { inquirerMenu, pause, readInput } = require('./helpers/inquirer');
+const { saveData } = require('./helpers/saveFile');
 const Tasks = require('./models/tasks');
 
 require('colors');
@@ -16,9 +17,11 @@ const main = async () => {
                 tasks.createTask(description);
                 break;
             case '2':
-                console.log('List task', tasks.getTask());
+                console.log('List task', tasks.getTask);
                 break;
         }
+
+        await saveData(tasks.getTask);
         await pause();
     }while(option !== '0');
     

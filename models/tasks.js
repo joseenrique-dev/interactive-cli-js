@@ -12,15 +12,20 @@ class Tasks {
         this._list = {};
     }
 
-    createTask(description){
+    createTask(description = '') {
         let task = new Task(description);
         console.log('Get Task', task);
         this._list[task.id] = task;
         return task;
     }
 
-    getTask(){
-        return this._list;
+    get getTask(){  
+        const list = [];
+        Object.keys(this._list).forEach(key => {
+            list.push(this._list[key]);
+        }
+        );
+        return list;
     }
 }
 
