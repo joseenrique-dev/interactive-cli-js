@@ -25,6 +25,9 @@ const main = async () => {
             case '2':
                 console.log(tasks.getTask);
                 break;
+            case '3':
+                console.log(tasks.fullList());
+                break;
         }
 
         await saveData(tasks.getTask);
