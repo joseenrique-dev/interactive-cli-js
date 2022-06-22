@@ -51,6 +51,12 @@ class Tasks {
         return resultList;
     }
 
+    /**
+    * Get List by status
+    * @param {string} status
+    * @returns string
+    * @memberof Tasks
+    */
     getListByStatus( status = 'completed'){
         let resultList = '';
         Object.keys(this._list).forEach(key => {
@@ -78,6 +84,11 @@ class Tasks {
         return list;
     }
 
+    removeTask(id){
+        if(this._list[id]){
+            delete this._list[id];
+        }
+    }
 }
 
 module.exports = Tasks;
