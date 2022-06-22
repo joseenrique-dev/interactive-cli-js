@@ -12,6 +12,11 @@ class Tasks {
         this._list = {};
     }
 
+    /**
+    * Create a new task
+    * @param {string} description
+    * @memberof Tasks
+    */
     createTask(description = '') {
         let task = new Task(description);
         console.log('Get Task', task);
@@ -19,30 +24,51 @@ class Tasks {
         return task;
     }
 
+    /**
+     * Load tasks from an array
+     * @param {array} tasks Array of tasks
+     * @memberof Tasks
+     * @param {*} tasks 
+     */
     loadTasksFromArray(tasks = []) {
         tasks.forEach(data =>{
             this._list[ data.id ] = data;
         })
     }
 
+    /**
+     * List all tasks in the list with the following format:
+     * Description :: Complete/Pending with color
+     * @returns {string} 
+     * @memberof Tasks
+     */
     fullList() {
-        // Expected result:
-        // Complete: green
-        // Pending: red
-        // 1. Description #1 :: Complete | Pending
-        // 2. Description #2 :: Complete | Pending
-        // 3. Description #3 :: Complete | Pending
-
         let resultList = '';
         Object.keys(this._list).forEach(key => {
             const task = this._list[key];
             resultList += `${task.description} :: ${task.completed !== null ? 'Complete'.green : 'Pending'.red}\n`;
         });
         return resultList;
-
-
     }
 
+    getListByStatus( status = 'completed'){
+        let resultList = '';
+        Object.keys(this._list).forEach(key => {
+            const task = this._list[key];
+            if(status === 'completed'){
+                if( task.completed !== null ){
+                    resultList += `${task.description}` +' :: Complete'.green+'\n';
+                } 
+            }else if(status === 'pending'){
+                    resultList += `${task.description}`+ ' :: Pending'.red+'\n';
+            }
+        });
+        return resultList;
+    }
+
+    /**
+    * Get task
+    */
     get getTask(){  
         const list = [];
         Object.keys(this._list).forEach(key => {

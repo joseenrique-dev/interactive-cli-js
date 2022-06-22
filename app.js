@@ -17,16 +17,21 @@ const main = async () => {
         }
         
         switch(option){
-            case '1':
+            case '1': // Create task
                 const description = await readInput();
-                
                 tasks.createTask(description);
                 break;
-            case '2':
+            case '2': // List task
                 console.log(tasks.getTask);
                 break;
-            case '3':
+            case '3': // List complete task
                 console.log(tasks.fullList());
+                break;
+            case '4': // List pending task
+                console.log(tasks.getListByStatus('pending'));
+                break;
+            case '5': // Complete task(s)
+                console.log(tasks.getListByStatus());
                 break;
         }
 
