@@ -1,4 +1,4 @@
-const { inquirerMenu, pause, readInput } = require('./helpers/inquirer');
+const { inquirerMenu, pause, readInput, taskListRemove, confirm } = require('./helpers/inquirer');
 const { saveData, readDBData } = require('./helpers/saveFile');
 const Tasks = require('./models/tasks');
 
@@ -33,9 +33,22 @@ const main = async () => {
             case '5': // Complete task(s)
                 console.log(tasks.getListByStatus());
                 break;
+            case '6': // Remove task
+                const id = await taskListRemove(tasks.getTask);
+                console.log('VAL ID-->', id);
+                const ok = await confirm(`Are you sure to remove task ${id}?`);
+                console.log({ok})
+                if( id !== '0' ){
+                    if (ok) {
+                        tasks.removeTask(id);
+                        console.log(`Task ${id} removed.`);
+                    }
+                }
+                break;
+            
         }
 
-        await saveData(tasks.getTask);
+        saveData(tasks.getTask);
         await pause();
     }while(option !== '0');
     

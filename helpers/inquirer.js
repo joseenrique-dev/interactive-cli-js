@@ -61,9 +61,52 @@ const readInput = async () => {
 }
 
 
+/**
+ * List task to remove from list
+ * @param {*} tasks 
+ * @returns 
+ */
+const taskListRemove = async ( tasks = [] ) => {
+    const choices = tasks.map( (task, index) => {
+        const idx = `${index+ 1}. `.green;
+        return {
+            value: task.id,
+            name: `${idx} ${task.description}`
+        }
+    });
+    choices.unshift({
+        value: '0',
+        name: '0. '.green + 'Cancel'
+    })
+    const questionsRemove = [
+        {
+            type: 'list',
+            name: 'id',
+            message: 'Select task to remove',
+            choices: choices
+        }
+    ]
+    const { id } = await inquirer.prompt(questionsRemove);
+    return id
+}
+
+const confirm = async ( message ) =>{
+    const questions = [
+        {
+            type: 'confirm',
+            name: 'ok',
+            message: message
+        }
+    ]
+    const { ok } = await inquirer.prompt(questions);
+    return ok;    
+}
+
 
 module.exports = {
     inquirerMenu,
     pause,
-    readInput
+    readInput,
+    taskListRemove,
+    confirm
 }
