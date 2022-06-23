@@ -66,7 +66,9 @@ class Tasks {
                     resultList += `${task.description}` +' :: Complete'.green+'\n';
                 } 
             }else if(status === 'pending'){
+                if( task.completed === null ){
                     resultList += `${task.description}`+ ' :: Pending'.red+'\n';
+                }
             }
         });
         return resultList;
@@ -89,6 +91,19 @@ class Tasks {
             delete this._list[id];
         }
     }
-}
 
+    toggleComplete(ids = []){
+        ids.forEach(id => {
+            const task  = this._list[id];
+            if( !task.completed ){
+                task.completed = new Date().toISOString();
+            }
+        })
+        this.getTask.forEach(task =>{
+            if( !ids.includes(task.id) ){
+                task.completed = null;
+            }
+        })
+    }
+}
 module.exports = Tasks;

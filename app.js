@@ -22,21 +22,21 @@ const main = async () => {
                 tasks.createTask(description);
                 break;
             case '2': // List task
-                console.log(tasks.getTask);
+                console.log(tasks.fullList());
                 break;
             case '3': // List complete task
-                console.log(tasks.fullList());
+                console.log(tasks.getListByStatus());
                 break;
             case '4': // List pending task
                 console.log(tasks.getListByStatus('pending'));
                 break;
             case '5': // Complete task(s)
                 const ids  = await showCheckList(tasks.getTask);
+                tasks.toggleComplete(ids);
                 console.log(ids);
                 break;
             case '6': // Remove task
                 const id = await taskListRemove(tasks.getTask);
-                console.log('VAL ID-->', id);
                 const ok = await confirm(`Are you sure to remove task ${id}?`);
                 console.log({ok})
                 if( id !== '0' ){

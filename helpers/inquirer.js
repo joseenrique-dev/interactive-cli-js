@@ -113,7 +113,7 @@ const showCheckList = async ( tasks = [] ) => {
         return {
             value: task.id,
             name: `${idx} ${task.description}`,
-            checked: true
+            checked: task.completed !== null ? true : false
         }
     });
     
